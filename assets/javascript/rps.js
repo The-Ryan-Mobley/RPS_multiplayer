@@ -22,3 +22,16 @@ database.ref().set({
   testing: testvar,
 
 });
+var connectionsRef = database.ref('/connections');
+var connectedRef = database.ref('.info/connected');
+connectedRef.on('value', (snap)=>{
+  if(snap.val()){
+    let con = connectionsRef.push(true)
+    con.onDisconnect().remove();
+  }
+
+});
+connectionsRef.on('value',(snapshot)=>{
+  console.log(snapshot.numChildren());
+
+})
