@@ -18,7 +18,7 @@ const play_button =$('#play');
 
 var testvar ="hello world";
 
-firebase.ref().set({
+database.ref().set({
   testing: testvar,
 
 });
