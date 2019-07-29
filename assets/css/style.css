@@ -1,0 +1,28 @@
+.selection-point{
+    width:30em;
+    height:30em;;
+    text-align:center;
+    border-style:solid;
+    border-width:1%;
+    border-color: black;
+    margin:2%;
+    float:left;
+}
+.selection-point:hover{
+    border-color:yellow;
+
+}
+.selection-point:click{
+    border-color:green;
+}
+
+#rock{
+    margin-left:8%;
+
+}
+#paper{
+
+}
+#scissors{
+
+}

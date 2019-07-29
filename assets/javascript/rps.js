@@ -1,5 +1,5 @@
 //initialize firebase
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyD5fyqB6aBN7cPHhByuHSmpY6ERh8cXwh4",
   authDomain: "rockpaperscissors-d74be.firebaseapp.com",
   databaseURL: "https://rockpaperscissors-d74be.firebaseio.com",
