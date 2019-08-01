@@ -113,7 +113,7 @@ function rps(pone_choice, ptwo_choice) {
       }
     }
   }
-}
+
 
 
 var connectionsRef = database.ref('/connections');
@@ -159,7 +159,12 @@ $('.player-one-form').on('click', '.selection-point', (event) => {
   console.log(clicked.data('name'));
   player.choice = clicked.data('name');
   playerone_clicked = true;
-  
+  database.ref().set({
+    playerChoice: player.choice,
+    playerClicked: playerone_clicked,
+
+  });
+  round_calc();
 
 });
 $('.player-two-form').on('click', '.selection-point', (event) => {
@@ -167,5 +172,11 @@ $('.player-two-form').on('click', '.selection-point', (event) => {
   console.log(clicked.data('name'));
   opponent.choice = clicked.data('name');
   playertwo_clicked = true;
+  database.ref().set({
+    opponentChoice: opponent.choice,
+    opponentClicked: playertwo_clicked,
+
+  });
+  round_calc();
 
 });
