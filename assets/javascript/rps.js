@@ -122,8 +122,8 @@ var connectionsRef = database.ref('/connections');
 var connectedRef = database.ref('.info/connected');
 connectedRef.on('value', (snap) => {
   if (snap.val()) {
-    let con = connectionsRef.push(true);
-    con.onDisconnect().remove();
+    let connected = connectionsRef.push(true);
+    connected.onDisconnect().remove();
   }
 
 });
@@ -140,8 +140,9 @@ connectionsRef.once('value', function (snapshot) {
     con.set(player);
     con.onDisconnect().remove();
     let statuslog = $('<p>');
+    $('.chat').append(statuslog);
     statuslog.html('player joined');
-    $('chat').append(statuslog);
+    
     
   } else {
     app.delete();
@@ -149,27 +150,39 @@ connectionsRef.once('value', function (snapshot) {
   console.log("You are Player " + player.number)
   console.log("You are Opponent " + opponent.number)
 });
-if (player.number = '1') {
-  $(".player-two-form").hide();
-  
-}
 
 connectionsRef.on('value', function (snapshot) {
   if (con) {
     if (Object.keys(snapshot.val()).indexOf(opponent.number) !== -1) {
       opponent = snapshot.val()[opponent.number];
       player = snapshot.val()[player.number];
+      console.log(player);
+      console.log(opponent);
+      
     }
   }
-})
+});
 
 
 $('.player-one-form').on('click', '.selection-point', (event) => {
   let clicked = $('.selections').find(event.target);
-  console.log(clicked.data('name'));
-  player.choice = clicked.data('name');
-  playerone_clicked = true;
   
-  round_calc();
+  
+  playerone_clicked = true;
+  connectionsRef.on('value', function (snapshot) {
+    if(con.path.pieces_[1] === '1'){
+      console.log("this is the player answer");
+      player.choice = clicked.data('name');
+      console.log(clicked.data('name'));
+    }else{
+      opponent.choice = clicked.data('name');
+      console.log("picked"+opponent.choice);
+      console.log(snapshot.val());
+      
+    }
+    round_calc();
+    
+  });
+  
 
 });
