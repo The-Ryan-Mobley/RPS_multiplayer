@@ -12,15 +12,25 @@
       1px 1px 0 #000;
   
   }
+.rps-title{
+    text-align: center;
+}
+.player-one-form{
+    width:100%;
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 1 1 10em;
+
+  }
 .selection-point{
     width:10em;
     height:10em;;
-    text-align:center;
     border-style:solid;
     border-width:1%;
     border-color: black;
     margin:2%;
-    float:left;
+    
 }
 .selection-point:hover{
     border-color:yellow;
@@ -29,9 +39,17 @@
 .selection-point:click{
     border-color:green;
 }
+.w-l-one{
+    text-align: justify;
+
+}
+.w-l-two{
+    text-align: right;
+
+}
 
 #rock{
-    margin-left:8%;
+   
 
 }
 #paper{
@@ -44,5 +62,9 @@
     text-align: center;
 }
 .chat{
+    width:100%;
+    border-style:solid;
+    border-width: 1%;
+    border-color:black;
     text-align: center;
 }
