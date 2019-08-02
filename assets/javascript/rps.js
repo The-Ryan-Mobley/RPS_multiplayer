@@ -34,12 +34,14 @@ class user {
 var player = new user();
 var opponent = new user();
 
-var connectionsRef = database.ref('/connections');
-var connectedRef = database.ref('.info/connected');
+const connectionsRef = database.ref('/connections');
+const connectedRef = database.ref('.info/connected');
+const chatRef = database.ref('/chat');
 connectedRef.on('value', (snap) => {
   if (snap.val()) {
     let connected = connectionsRef.push(true);
     connected.onDisconnect().remove();
+    chatRef.onDisconnect().remove();
   }
 
 });
@@ -100,6 +102,17 @@ function round_calc() {
   
 
 }
+chatRef.on('child_added',(childsnap)=>{
+  console.log(childsnap.val());
+  let chattext = childsnap.val();
+  
+  let newchat = $('<p>');
+  $('.chat').append(childsnap.val().chatline + '<br>');
+  
+  
+
+
+});
 function set_next_round(){
   console.log(player.wins);
   
@@ -252,7 +265,7 @@ connectedRef.on('value',(snapshot)=>{
 $('.player-one-form').on('click', '.selection-point', (event) => {
   let clicked = $('.selections').find(event.target);
   
-  connectionsRef.once('value', function (snapshot) {
+  connectionsRef.once('value', ()=> {
     
     if(con.path.pieces_[1] === '1'){
       player.choice = clicked.data('name');
@@ -269,5 +282,14 @@ $('.player-one-form').on('click', '.selection-point', (event) => {
   });
   round_calc();
   
+
+});
+$('#chat-button').on('click',()=>{
+  
+  
+  chatRef.push({
+    chatline: $('#chat-line').val(),
+
+  });
 
 });
