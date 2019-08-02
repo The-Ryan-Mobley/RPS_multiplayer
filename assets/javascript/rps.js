@@ -75,6 +75,7 @@ connectionsRef.on('value', function (snapshot) {
     }
     
     
+    
   }
   
 });
@@ -84,33 +85,29 @@ function round_calc() {
     if((snapshot.val()[player.number].clicked === true) && (snapshot.val()[opponent.number].clicked === true)){
       console.log('trigger');
       rps(snapshot.val()[player.number].choice,snapshot.val()[opponent.number].choice)
-      
+      $('#wins-p').html('WINS: '+ snapshot.val()[player.number].wins);
+      $('#losses-p').html('LOSSES: '+ snapshot.val()[player.number].losses);
+      $('#wins-o').html('WINS: '+ snapshot.val()[opponent.number].wins);
+      $('#losses-o').html('LOSSES: '+ snapshot.val()[opponent.number].losses);
   
       
 
     }
 
   });
-  set_next_round();
+  
   
   
 
 }
 function set_next_round(){
+  console.log(player.wins);
   
-    // connectionsRef.child('1').set({choice: ""});
-    // connectionsRef.child('1').set({clicked: false});
-    // connectionsRef.child('1').set({wins: player.wins});
-    // connectionsRef.child('1').set({losses: player.losses});
-    // connectionsRef.child('1').set({turns: player.turns});
-
-    // connectionsRef.child('2').set({choice: ""});
-    // connectionsRef.child('2').set({clicked: false});
-    // connectionsRef.child('2').set({wins: opponent.wins});
-    // connectionsRef.child('2').set({losses: opponent.losses});
-    // connectionsRef.child('2').set({turns: opponent.turns});
+  connectionsRef.child('1').update({"/choice": ""});
+  connectionsRef.child('1').update({"/clicked": false});
   
-  
+  connectionsRef.child('2').update({"/choice": ""});
+  connectionsRef.child('2').update({"/clicked": false});
   
 
 }
@@ -125,6 +122,11 @@ function rps(pone_choice, ptwo_choice) {
       chat_line.html('DRAW!');
       player.turns++;
       opponent.turns++;
+      console.log(player.wins);
+      connectionsRef.child('1').update({"/wins": player.wins});
+      connectionsRef.child('2').update({"/losses": opponent.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     } else if (ptwo_choice === 'paper') {
       let chat_line = $('<p>');
@@ -134,6 +136,11 @@ function rps(pone_choice, ptwo_choice) {
       opponent.wins++;
       player.turns++;
       opponent.turns++;
+      connectionsRef.child('2').update({"/wins": opponent.wins});
+      connectionsRef.child('1').update({"/losses": player.losses})
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
+      
 
     } else {
       let chat_line = $('<p>');
@@ -143,6 +150,11 @@ function rps(pone_choice, ptwo_choice) {
       opponent.losses++;
       player.turns++;
       opponent.turns++;
+      console.log(player.wins);
+      connectionsRef.child('1').update({"/wins": player.wins});
+      connectionsRef.child('2').update({"/losses": opponent.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     }
   }
@@ -155,6 +167,11 @@ function rps(pone_choice, ptwo_choice) {
       opponent.losses++;
       player.turns++;
       opponent.turns++;
+      console.log(player.wins);
+      connectionsRef.child('1').update({"/wins": player.wins});
+      connectionsRef.child('2').update({"/losses": opponent.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     } else if (ptwo_choice === 'paper') {
       let chat_line = $('<p>');
@@ -162,6 +179,8 @@ function rps(pone_choice, ptwo_choice) {
       chat_line.html('DRAW!');
       player.turns++;
       opponent.turns++;
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     } else {
       let chat_line = $('<p>');
@@ -171,6 +190,10 @@ function rps(pone_choice, ptwo_choice) {
       opponent.wins++;
       player.turns++;
       opponent.turns++;
+      connectionsRef.child('2').update({"/wins": opponent.wins});
+      connectionsRef.child('1').update({"/losses": player.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     }
   }
@@ -184,6 +207,10 @@ function rps(pone_choice, ptwo_choice) {
       opponent.wins++;
       player.turns++;
       opponent.turns++;
+      connectionsRef.child('2').update({"/wins": opponent.wins});
+      connectionsRef.child('1').update({"/losses": player.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     } else if (ptwo_choice === 'paper') {
       let chat_line = $('<p>');
@@ -194,18 +221,34 @@ function rps(pone_choice, ptwo_choice) {
       opponent.losses++;
       player.turns++;
       opponent.turns++;
+      console.log(player.wins);
+      connectionsRef.child('1').update({"/wins": player.wins});
+      connectionsRef.child('2').update({"/losses": opponent.losses});
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     } else {
+      let chat_line = $('<p>');
+      chat_line.appendTo($('.chat'));
+      chat_line.html('DRAW!');
+      player.turns++;
+      opponent.turns++;
+      connectionsRef.child('1').update({"/turns": player.turns});
+      connectionsRef.child('2').update({"/turns": opponent.turns});
 
     }
   }
+  set_next_round();
 }
 
 
 
 
 
+connectedRef.on('value',(snapshot)=>{
+  
 
+});
 $('.player-one-form').on('click', '.selection-point', (event) => {
   let clicked = $('.selections').find(event.target);
   
