@@ -217,9 +217,9 @@ function rps(pone_choice, ptwo_choice) {
 connectionsRef.on('value', (snapshot) => { //tracks win loss html elements
   if ((Object.keys(snapshot.val()).indexOf('1') !== -1) && (Object.keys(snapshot.val()).indexOf('2') !== -1)) {
     $('#wins-p').html('WINS: ' + snapshot.val()[player.number].wins);
-    $('#losses-p').html('LOSSES: ' + snapshot.val()[player.number].losses);
+    $('#losses-p').html('LOSSES: ' + snapshot.val()[opponent.number].wins);
     $('#wins-o').html('WINS: ' + snapshot.val()[opponent.number].wins);
-    $('#losses-o').html('LOSSES: ' + snapshot.val()[opponent.number].losses);
+    $('#losses-o').html('LOSSES: ' + snapshot.val()[player.number].wins);
   }
 });
 $('.player-one-form').on('click', '.pic-select', (event) => { //click event to get value
