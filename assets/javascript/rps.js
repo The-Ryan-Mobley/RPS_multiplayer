@@ -86,13 +86,7 @@ function round_calc() {
   connectionsRef.once('value',(snapshot)=>{
     if((snapshot.val()[player.number].clicked === true) && (snapshot.val()[opponent.number].clicked === true)){
       console.log('trigger');
-      rps(snapshot.val()[player.number].choice,snapshot.val()[opponent.number].choice)
-      $('#wins-p').html('WINS: '+ snapshot.val()[player.number].wins);
-      $('#losses-p').html('LOSSES: '+ snapshot.val()[player.number].losses);
-      $('#wins-o').html('WINS: '+ snapshot.val()[opponent.number].wins);
-      $('#losses-o').html('LOSSES: '+ snapshot.val()[opponent.number].losses);
-  
-      
+      rps(snapshot.val()[player.number].choice,snapshot.val()[opponent.number].choice);
 
     }
 
@@ -258,9 +252,13 @@ function rps(pone_choice, ptwo_choice) {
 
 
 
-connectedRef.on('value',(snapshot)=>{
-  
-
+connectionsRef.on('value',(snapshot)=>{ //tracks win loss
+  if((Object.keys(snapshot.val()).indexOf('1') !== -1)&&(Object.keys(snapshot.val()).indexOf('2') !== -1)){
+    $('#wins-p').html('WINS: '+ snapshot.val()[player.number].wins);
+    $('#losses-p').html('LOSSES: '+ snapshot.val()[player.number].losses);
+    $('#wins-o').html('WINS: '+ snapshot.val()[opponent.number].wins);
+    $('#losses-o').html('LOSSES: '+ snapshot.val()[opponent.number].losses);
+  }
 });
 $('.player-one-form').on('click', '.selection-point', (event) => {
   let clicked = $('.selections').find(event.target);
