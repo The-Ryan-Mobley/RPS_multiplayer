@@ -260,7 +260,7 @@ connectionsRef.on('value',(snapshot)=>{ //tracks win loss
     $('#losses-o').html('LOSSES: '+ snapshot.val()[opponent.number].losses);
   }
 });
-$('.player-one-form').on('click', '.selection-point', (event) => {
+$('.player-one-form').on('click', '.pic-select', (event) => {
   let clicked = $('.selections').find(event.target);
   
   connectionsRef.once('value', ()=> {

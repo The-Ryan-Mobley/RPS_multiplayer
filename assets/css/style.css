@@ -18,6 +18,7 @@ body{
     flex-wrap: wrap;
     flex-direction: row;
     flex: 1 1 10em;
+    justify-content: center;
 
   }
 .selection-point{
@@ -28,6 +29,10 @@ body{
     border-color: #ffffff;
     margin:2%;
     
+}
+.pic-select{
+    width:100%;
+    height:100%;
 }
 .selection-point:hover{
     border-color:yellow;
@@ -45,10 +50,7 @@ body{
 
 }
 
-#rock{
-   
 
-}
 #paper{
 
 }
@@ -66,4 +68,53 @@ body{
     border-color:#ffffff;
     text-align: center;
     overflow-y:scroll;
+}
+@media (min-width: 768px) and (max-width: 1440px) {
+    .selection-point{
+        width: 12em;
+        height: 12em;
+    }
+}
+
+
+@media (min-width: 321px) and (max-width: 480px) {
+    .rps-title{
+        font-size:3em;
+    }
+    h1{
+        font-size: 2em;
+    }
+    .selection-point{
+        width:6em;
+        height:6em;
+    }
+    .chat{
+        margin-top: 5%;
+    }
+    #chat-line{
+        margin-top:1%;
+    }
+
+}
+@media (max-width: 320px){
+    .rps-title{
+        font-size:3em;
+    }
+    h1{
+        font-size:1em;
+    }
+    .selection-point{
+        width:5em;
+        height:5em;
+    }
+    .chat{
+        margin-top:5%;
+        height:5em;
+    }
+    #chat-line{
+        margin-left:8%;
+    }
+    #chat-button{
+        margin-left:35%;
+    }
 }
