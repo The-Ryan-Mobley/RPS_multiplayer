@@ -214,10 +214,6 @@ function rps(pone_choice, ptwo_choice) {
   set_next_round();
 }
 
-
-
-
-
 connectionsRef.on('value', (snapshot) => { //tracks win loss html elements
   if ((Object.keys(snapshot.val()).indexOf('1') !== -1) && (Object.keys(snapshot.val()).indexOf('2') !== -1)) {
     $('#wins-p').html('WINS: ' + snapshot.val()[player.number].wins);
